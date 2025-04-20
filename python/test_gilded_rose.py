@@ -1,15 +1,5 @@
 import pytest
-
-class Item:
-    def __init__(self, name, sell_in, quality):
-        self.name = name
-        self.sell_in = sell_in
-        self.quality = quality
-
-    def __repr__(self):
-        return f"{self.name}, {self.sell_in}, {self.quality}"
-
-from gilded_rose import GildedRose
+from gilded_rose import GildedRose, Item
 
 def update_and_return(name, sell_in, quality):
     items = [Item(name, sell_in, quality)]
