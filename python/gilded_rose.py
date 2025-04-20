@@ -10,7 +10,10 @@ class GildedRose(object):
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
                 if item.quality > 0:
                     if item.name != "Sulfuras, Hand of Ragnaros":
-                        item.quality = item.quality - 1
+                        if item.name == "Conjured":
+                            item.quality = max(0, item.quality - 2)
+                        else:    
+                            item.quality = item.quality - 1
             else:
                 if item.quality < 50:
                     item.quality = item.quality + 1
@@ -29,6 +32,8 @@ class GildedRose(object):
                         if item.quality > 0:
                             if item.name != "Sulfuras, Hand of Ragnaros":
                                 item.quality = item.quality - 1
+                            if item.name == "Conjured":
+                                item.quality = max(0, item.quality - 2)
                     else:
                         item.quality = item.quality - item.quality
                 else:
