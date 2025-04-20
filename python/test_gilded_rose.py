@@ -59,3 +59,21 @@ def test_backstage_increase_by_3():
 def test_backstage_drops_to_zero():
     item = update_and_return("Backstage passes to a TAFKAL80ETC concert", 0, 20)
     assert item.quality == 0
+
+def test_conjured_item_before_sell_date():
+    item = update_and_return("Conjured", 5, 10)
+    assert item.sell_in == 4
+    assert item.quality == 8  # -2 degradation
+
+def test_conjured_item_near_zero_quality():
+    item = update_and_return("Conjured", 5, 1)
+    assert item.quality == 0  # Should not be negative
+
+def test_conjured_item_after_sell_date():
+    item = update_and_return("Conjured", 0, 10)
+    assert item.sell_in == -1
+    assert item.quality == 6  
+
+def test_conjured_item_after_sell_date_low_quality():
+    item = update_and_return("Conjured", 0, 3)
+    assert item.quality >= 0  # Ensure not negative
